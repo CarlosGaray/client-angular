@@ -46,6 +46,8 @@ export class SignInComponent {
         M.toast({ html: data.error, classes: "#c62828 red darken-3" });
       } else {
         const data = await response.json();
+        localStorage.setItem("jwt", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
         M.toast({ html: "Signedin succes", classes: "#43a047 green darken-1" });
         this.router.navigate(['/']);
       }
