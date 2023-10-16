@@ -1,14 +1,17 @@
-<div class="card input-field" [style]='{margin:"30px auto", maxWidth:"500px", padding:"20px", textAlign:"center"}'>
-  <input type="text" placeholder="title" [(ngModel)]="title" />
-  <input type="text" placeholder="body" [(ngModel)]="body" />
-  <div class="file-field input-field">
+<div class="card input-field" [style]="{ margin: '30px auto', maxWidth: '500px', padding: '20px', textAlign: 'center' }">
+  <form [formGroup]="fileUploadForm" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="title" formControlName="title" />
+    <input type="text" placeholder="body" formControlName="body" />
+    <div class="file-field input-field">
       <div class="btn #64b5f6 blue darken-1">
-          <span>Upload Image</span>
-          <input type="file" (change)="onFileSelected($event)"/>
+        <span>Upload Image</span>
+        <input type="file" (change)="onFileSelected($event)" formControlName="fileSource" />
       </div>
       <div class="file-path-wrapper">
-          <input class="file-path validate" type="text" />
+        <input class="file-path validate" type="text" />
       </div>
-  </div>
-  <button class="btn waves-effect waves-light #64b5f6 blue darken-1">Submit post</button>
+    </div>
+    <button type="submit" class="btn waves-effect waves-light #64b5f6 blue darken-1" [disabled]="!fileUploadForm.valid">Submit post</button>
+  </form>
 </div>
+
